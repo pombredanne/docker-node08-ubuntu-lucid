@@ -23,4 +23,4 @@ RUN node --version
 RUN mv /usr/bin/npm /usr/bin/npm_old && /usr/bin/npm_old install -g npm
 RUN npm -g install jshint mocha istanbul node-gyp@0.8
 # node-gyp configure needs to be run in an actual node_module
-RUN git clone --depth 1 https://github.com/sutoiku/node-kafka && cd node kafka && node-gyp configure && cd .. && rm -rf node-kafka
+RUN git clone --depth 1 https://github.com/sutoiku/node-kafka && cd node-kafka && node-gyp configure && cd .. && rm -rf node-kafka
