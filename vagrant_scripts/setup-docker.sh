@@ -5,8 +5,11 @@ if [ -n "$UBUNTU_MIRROR" ]; then
   apt-get update
 fi
 
-cd /home/core/share/docker-stack
+cd /home/core/share/docker-stack-lucid-node-08
 docker build -t lucid-node08/run .
+
+cd /home/core/share/docker-stack-lucid-node-010
+docker build -t lucid-node010/run .
 
 echo 'Ready to run'
 #docker run -v `pwd`:`pwd` -w `pwd` -t lucid-node08/run make build

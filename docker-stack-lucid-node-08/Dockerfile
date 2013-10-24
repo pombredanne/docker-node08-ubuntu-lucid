@@ -11,7 +11,7 @@ RUN export UBUNTU_MIRROR=sg && sed -i -e "s/http:\/\/archive\.ubuntu\.com/http:\
 RUN apt-get update
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q --force-yes python-software-properties make g++ wget git-core
-RUN add-apt-repository ppa:chris-lea/node.js-legacy && apt-get update && apt-get install -y -q --force-yes nodejs=0.8.25-2chl1~lucid1 && apt-get install -y -q --force-yes npm
+RUN add-apt-repository ppa:chris-lea/node.js && apt-get update && apt-get install -y -q --force-yes nodejs=0.10.21-1chl1~lucid1 && apt-get install -y -q --force-yes npm
 
 RUN apt-get clean
 
@@ -19,8 +19,6 @@ RUN apt-get clean
 RUN echo `which node`
 RUN node --version
 
-# update npm (tricky) otherwise it crashes often. npm update npm -g did not work.
-RUN mv /usr/bin/npm /usr/bin/npm_old && /usr/bin/npm_old install -g npm
-RUN npm -g install jshint mocha istanbul node-gyp@0.8
+RUN npm -g install jshint mocha istanbul node-gyp@0.10
 # node-gyp configure needs to be run in an actual node_module
 RUN git clone --depth 1 https://github.com/sutoiku/node-kafka && cd node-kafka && node-gyp configure && cd .. && rm -rf node-kafka

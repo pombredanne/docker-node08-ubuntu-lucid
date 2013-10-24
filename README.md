@@ -9,16 +9,21 @@ Vagrant:
 On a ubuntu host with docker installed
 ---------------------------------------
 ```
-cd docker-stack && sudo docker build -t lucid-node08/run .
+cd ~/share/docker-stack-lucid-node08 && sudo docker build -t lucid-node08/run .
+cd ~/share/docker-stack-lucid-node010 && sudo docker build -t lucid-node010/run .
 ```
 
 Example build: node-kafka
 --------------------------
 ```
 vagrant ssh
-git clone https://github.com/sutoiku/node-kafka
+git clone --depth 1 https://github.com/sutoiku/node-kafka
 cd node-kafka
-sudo docker run -v `pwd`:`pwd` -w `pwd` -t lucid-node08/run node-gyp build
+echo "#!/bin/bash" > buildit
+echo "node-gyp configure" >> buildit
+echo "node-gyp build" >> buildit
+sudo docker run -v `pwd`:`pwd` -w `pwd` -t lucid-node08/run /bin/bash buildit
+sudo docker run -v `pwd`:`pwd` -w `pwd` -t lucid-node010/run /bin/bash buildit
 ```
 
 To run an interactive shell:
